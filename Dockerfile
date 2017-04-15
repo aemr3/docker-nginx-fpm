@@ -16,7 +16,7 @@ RUN \
     php-pear php-pspell php-soap php-xml php-zip \
     supervisor inotify-tools jq git rsync wget patch tar bzip2 unzip openssh-client \
     nginx vim curl mysql-client libxrender1 libxext6 iputils-ping && \
-    echo -e "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
+    echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     rm -rf /var/lib/apt/lists/* /etc/php/5* /etc/php/7.0 /etc/nginx/sites*
 
