@@ -15,4 +15,7 @@ mkdir -p /data/tmp/nginx/{client_temp,proxy_temp}
 chmod 711 /data/tmp/nginx
 
 mkdir -p /data/www
+
+set +e
+
 chown -R www-data:www-data /data/www & 2>&1
