@@ -15,4 +15,4 @@ mkdir -p /data/tmp/nginx/{client_temp,proxy_temp}
 chmod 711 /data/tmp/nginx
 
 mkdir -p /data/www
-chown -R www-data:www-data /data/www
+chown -R www-data:www-data /data/www & 2>&1
