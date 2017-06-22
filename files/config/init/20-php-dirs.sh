@@ -11,4 +11,7 @@ set -e
 mkdir -p /data/conf/php-fpm
 mkdir -p /data/tmp/php/{uploads,sessions}
 mkdir -p /data/tmp/nginx/{fastcgi_cache,fastcgi_cache_tmp}
-chown -R www-data:www-data /data/tmp/php /data/tmp/nginx/fastcgi_cache*
+
+set +e
+
+chown -R www-data:www-data /data/tmp/php /data/tmp/nginx/fastcgi_cache* & 2>&1
