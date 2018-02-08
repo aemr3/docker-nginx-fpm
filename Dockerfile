@@ -11,11 +11,11 @@ RUN \
     add-apt-repository -y ppa:ondrej/php && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-    php-cli php-fpm php-curl php-bcmath php-gd php-geoip php-gmp php-imagick php-intl \
-    php-json php-mbstring php-memcached php-mcrypt php-mysql php-redis php7.1-opcache \
-    php-pear php-pspell php-soap php-xml php-zip \
+    php7.1-cli php7.1-fpm php7.1-curl php7.1-bcmath php7.1-gd php7.1-geoip php7.1-gmp php7.1-imagick php7.1-intl \
+    php7.1-json php7.1-mbstring php7.1-memcached php7.1-mcrypt php7.1-mysql php7.1-redis php7.1-opcache \
+    php-pear php7.1-pspell php7.1-soap php7.1-xml php7.1-zip \
     supervisor inotify-tools jq git rsync wget patch tar bzip2 unzip openssh-client \
-    nginx vim curl mysql-client libxrender1 libxext6 iputils-ping && \
+    nginx vim curl mysql-client libxext6 iputils-ping && \
     echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     rm -rf /var/lib/apt/lists/* /etc/php/5* /etc/php/7.0 /etc/nginx/sites*
