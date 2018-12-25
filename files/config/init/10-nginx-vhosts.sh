@@ -16,8 +16,12 @@ PROXY_TARGET_CONF_HTTPS="/etc/nginx/hosts.d/internal-proxy-https.conf"
 
 if [ "${NGINX_GENERATE_DEFAULT_VHOST^^}" = TRUE ]; then
   cat $VHOSTS_DEFAULT_SOURCE_CONF > $VHOSTS_DEFAULT_TARGET_CONF
-  mkdir -p /data/www/default && echo "default vhost # created on $(date)" > /data/www/default/index.html
-  echo "Nginx: default *catch-all* vhost generated."; echo
+  sed -i "s#/data/www/default#${NGINX_DEFAULT_VHOST_ROOT_PATH}#" $VHOSTS_DEFAULT_TARGET_CONF
+  mkdir -p /data/www/default
+  if [ "${NGINX_INSTALL_DEFAULT_VHOST_FILES^^}" = TRUE ]; then
+    echo "default vhost # created on $(date)" > /data/www/default/index.html
+    echo "Nginx: default *catch-all* vhost generated."; echo
+  fi
 fi
 
 if [ ! -z "${SET_INTERNAL_PROXY_ON_PORT+xxx}" ] && [ ! -z "${SET_INTERNAL_PROXY_ON_PORT}" ]; then
