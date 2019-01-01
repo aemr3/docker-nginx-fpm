@@ -42,5 +42,5 @@ else
   if [[ $@ ]]; then
     eval $@
   fi
-  supervisord -n $SUPERVISOR_PARAMS
+  exec supervisord -n $SUPERVISOR_PARAMS
 fi
