@@ -18,4 +18,8 @@ mkdir -p /data/www
 
 set +e
 
+
+ln -sf /dev/stdout /var/log/nginx/access.log
+ln -sf /dev/stderr /var/log/nginx/error.log
+
 chown -R www-data:www-data /data/www & 2>&1
