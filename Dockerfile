@@ -1,7 +1,4 @@
-FROM ubuntu:16.04
-
-ENV DEBIAN_FRONTEND noninteractive
-ENV LC_ALL C.UTF-8
+FROM alpine:3.8
 
 ENV NGINX_GENERATE_DEFAULT_VHOST false
 ENV NGINX_RELOAD_CONFIG true
@@ -13,19 +10,11 @@ ENV NGINX_REAL_IP_HEADER X-Forwarded-For
 ENV STATUS_PAGE_ALLOWED_IP 127.0.0.1
 
 RUN \
-    apt-get update && \
-    apt-get install -y --no-install-recommends software-properties-common && \
-    add-apt-repository -y ppa:ondrej/php && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends \
-    php7.1-cli php7.1-fpm php7.1-curl php7.1-bcmath php7.1-gd php7.1-geoip php7.1-gmp php7.1-imagick php7.1-intl \
-    php7.1-json php7.1-mbstring php7.1-memcached php7.1-mcrypt php7.1-mysql php7.1-redis php7.1-opcache \
-    php-pear php7.1-pspell php7.1-soap php7.1-xml php7.1-zip \
-    supervisor cron inotify-tools jq git rsync wget patch tar bzip2 unzip openssh-client \
-    nginx vim curl mysql-client libxext6 libxrender1 iputils-ping && \
-    echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    rm -rf /var/lib/apt/lists/* /etc/php/5* /etc/php/7.0 /etc/nginx/sites*
+    apk --no-cache add bash nginx supervisor curl wget tar bzip2 unzip inotify-tools vim mysql-client \
+    php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl php7-zlib php7-xml php7-phar php7-tokenizer php7-fileinfo \
+    php7-intl php7-dom php7-xmlreader php7-xmlwriter php7-ctype php7-mbstring php7-gd php7-imagick php7-bcmath php7-pdo \
+    php7-pdo_mysql php7-gmp php7-memcached php7-mcrypt php7-redis php7-opcache php7-pear php7-pspell php7-soap php7-zip && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ADD files /
 
