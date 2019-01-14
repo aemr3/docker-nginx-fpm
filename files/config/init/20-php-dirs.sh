@@ -14,4 +14,4 @@ mkdir -p /data/tmp/nginx/{fastcgi_cache,fastcgi_cache_tmp}
 
 set +e
 
-chown -R nobody:nobody /data/tmp/php /data/tmp/nginx/fastcgi_cache* & 2>&1
+chown -R nginx:nginx /data/tmp/php /data/tmp/nginx/fastcgi_cache* & 2>&1

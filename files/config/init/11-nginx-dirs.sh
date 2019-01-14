@@ -21,4 +21,4 @@ set +e
 ln -sf /dev/stdout /data/logs/nginx-access.log
 ln -sf /dev/stderr /data/logs/nginx-error.log
 
-chown -R nobody:nobody /data/www & 2>&1
+chown -R nginx:nginx /data/www & 2>&1
