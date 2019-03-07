@@ -1,5 +1,17 @@
 FROM alpine:3.7
 
+RUN \
+    apk add --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev pcre-dev && \
+    git clone --depth=1 -b v1.5 https://github.com/mongodb/mongo-php-driver.git /tmp/php-mongodb && \
+    cd /tmp/php-mongodb && \
+    git submodule update --init && \
+    phpize && ./configure --prefix=/usr && make && make install && \
+    cd .. && rm -rf /tmp/php-mongodb/ && \
+    echo 'extension=mongodb.so' >> /etc/php7/conf.d/mongodb.ini && \
+    apk del .build-deps
+
+FROM alpine:3.7
+
 ENV NGINX_GENERATE_DEFAULT_VHOST false
 ENV NGINX_RELOAD_CONFIG true
 ENV NGINX_INSTALL_DEFAULT_VHOST_FILES false
@@ -17,6 +29,9 @@ RUN \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ADD files /
+
+COPY --from=0 /etc/php7/conf.d/mongodb.ini /etc/php7/conf.d/
+COPY --from=0 /usr/lib/php7/modules/mongodb.so /usr/lib/php7/modules/
 
 EXPOSE 80 443
 
